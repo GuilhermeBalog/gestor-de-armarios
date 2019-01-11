@@ -1,0 +1,44 @@
+{
+  "lang" : "pt-br",
+  "name": "Gestor de Armários",
+  "short_name": "Armários",
+  "description" : "Sistema para gestão de armários",
+  "icons": [{
+    "src": "/images/logo.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "/images/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "/images/logo.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "/images/logo.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }, {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation" : "portrait",
+  "background_color": "#0e3860",
+  "theme_color": "#062542",
+  "refresh": "false",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+    "platform": "play",
+    "id": "com.gestordearmarios.vendas"
+    }
+  ]
+}
