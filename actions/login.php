@@ -4,9 +4,9 @@
 include_once "../class/Administrador.php";
 $admin = new Administrador("");
 
-if(isset($_GET["tx_login"]) and isset($_GET["tx_pass"])){
-    if(!empty($_GET["tx_login"]) and !empty($_GET["tx_pass"])){
-        $login = $admin->login($_GET["tx_login"],$_GET["tx_pass"]);
+if(isset($_POST["tx_login"]) and isset($_POST["tx_pass"])){
+    if(!empty($_POST["tx_login"]) and !empty($_POST["tx_pass"])){
+        $login = $admin->login($_POST["tx_login"],$_POST["tx_pass"]);
 
         //Verifica se foi executado
         if($login == true){

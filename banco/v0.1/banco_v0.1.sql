@@ -6,6 +6,7 @@ create table tb_curso(
 	cd_curso int not null auto_increment,
     sg_curso varchar(5) not null,
     nm_curso varchar(60) not null,
+    st_curso boolean not null default 1,
     primary key(cd_curso),
     constraint curso_sg_curso_unico unique(sg_curso),
     constraint curso_nm_curso_unico unique(nm_curso)
@@ -24,6 +25,7 @@ create table tb_aluno(
 create table tb_local(
 	cd_local int not null auto_increment,
     nm_local varchar(60) not null,
+    st_local boolean not null default 1,
     primary key(cd_local),
     constraint local_nm_local_unico unique(nm_local)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -45,7 +47,7 @@ create table tb_aluguel(
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 create table tb_login(
-	cd_login int not null,
+	cd_login int not null auto_increment,
     nm_user varchar(150) not null,
     tx_login varchar(60) not null,
     tx_pass varchar(256) not null,
