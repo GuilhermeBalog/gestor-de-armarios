@@ -13,6 +13,33 @@ class Administrador extends Utilitarios
         $this->mysqli = $this->db_connect();
     }
 
+    //Inativa um registro de uma tabela
+    public function toggle($tabela, $cd){
+        $select = "SELECT st_$tabela as status from tb_$tabela where cd_$tabela = $cd";
+        $query = $this->mysqli->query($select);
+
+        if($query->num_rows > 0){
+            $dados = $query->fetch_object();
+
+            if($dados->status = 1){
+                $novo = 0;
+            }else if($dados->status == 0){
+                $novo = 1;
+            }else{
+                return false;
+            }
+
+            $update = "UPDATE tb_$tabela set st_$tabela = $novo";
+            if($this->mysqli->query($update)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
     //Cadastrar novos usuários
     public function cadastrar_usuario($nome, $login, $senha){
         $senha = $this->encriptar_senha($senha);
@@ -102,33 +129,6 @@ class Administrador extends Utilitarios
         }
     }
 
-    //Inativar ou Ativar um aluno
-    public function toggle_aluno($cd){
-        $select = "SELECT st_aluno as status from tb_aluno where cd_aluno = $cd";
-        $query = $this->mysqli->query($select);
-
-        if($query->num_rows > 0){
-            $dados = $query->fetch_object();
-            if($dados->status == 1){
-                $novo = 0;
-            }else if($dados->status == 0){
-                $novo = 1;
-            }else{
-                return false;
-            }
-
-            $update = "UPDATE tb_aluno set st_aluno = '$novo' where cd_aluno = $cd";
-            if($this->mysqli->query($update)){
-                return true;
-            }else{
-                return false;
-            }
-
-        }else{
-            return false;
-        }
-    }
-
     //Cadastrar novos locais
     public function cadastrar_local($nome){
         $sql = "INSERT into tb_local values(null, '$nome')";
@@ -159,34 +159,6 @@ class Administrador extends Utilitarios
 
         if($query->num_rows > 0){
             return $query;
-        }else{
-            return false;
-        }
-    }
-
-    //Inativar ou Ativar um local
-    public function toggle_local($cd){
-        $select = "SELECT st_local as status from tb_local where cd_local = $cd";
-        $query = $this->mysqli->query($select);
-
-        if($query->num_rows > 0){
-            $dados = $query->fetch_object();
-
-            if($dados->status == 1){
-                $novo = 0;
-            }else if($dados == 0){
-                $novo = 1;
-            }else{
-                return false;
-            }
-
-            $update = "UPDATE tb_local set st_local = '$novo' where cd_local = $cd";
-            if($this->mysqli->query($update)){
-                return true;
-            }else{
-                return false;
-            }
-
         }else{
             return false;
         }
@@ -228,30 +200,40 @@ class Administrador extends Utilitarios
         }
     }
 
-    //Inativar ou ativar um curso
-    public function toggle_curso($cd){
-        $select = "SELECT st_curso from tb_curso where cd_curso = $cd";
-        $query = $this->mysqli->query($select);
+    //Cadastrar um aluguel de armário
+    public function cadastrar_aluguel($id_aluno, $id_armario, $dt_aluguel, $vl_aluguel){
+        $sql = "INSERT INTO tb_aluguel values (null,'$id_aluno','$id_armario','$dt_aluguel','$vl_aluguel')";
 
-        if($query->num_rows > 0){
-            $dados = $query->fetch_object();
-
-            if($dados->st_curso = 1){
-                $novo = 0;
-            }else if($dados->st_curso == 0){
-                $novo = 1;
-            }else{
-                return false;
-            }
-
-            $update = "UPDATE tb_curso set st_curso = $novo";
-            if($this->mysqli->query($update)){
-                return true;
-            }else{
-                return false;
-            }
+        if($this->mysqli->query($sql)){
+            return true;
         }else{
             return false;
+        }
+    }
+
+    //Atualiza os dados de um aluguel
+    public function atualizar_aluguel($cd_aluguel, $id_aluno, $id_armario, $dt_aluguel, $vl_aluguel){
+        $sql = "UPDATE tb_aluguel set id_aluno = '$id_aluno', id_armario = '$id_armario', dt_aluguel = '$dt_aluguel', vl_aluguel = '$vl_aluguel' where cd_aluguel = $cd_aluguel";
+
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Consultar aluguel
+    public function consultar_aluguel($cd = ""){
+        $sql = "SELECT * from tb_aluguel";
+        if($cd != "") {
+            $sql .= " where cd_aluguel = $cd";
+        }
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return null;
         }
     }
 }
