@@ -15,6 +15,7 @@ create table tb_aluno(
 	cd_aluno int not null auto_increment,
     nm_aluno varchar(150) not null,
     nr_ano int(1) not null default 1,
+    st_aluno boolean not null default 1,
     id_curso int not null,
     primary key(cd_aluno),
     constraint aluno_fk_id_curso foreign key(id_curso) references tb_curso(cd_curso)
