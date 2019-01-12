@@ -40,7 +40,7 @@ abstract class Utilitarios
         $query = $this->mysqli->query($sql);
         if($query->num_rows > 0){
             session_start();
-            $row = $query->fetch(PDO::FETCH_ASSOC);
+            $row = $query->fetch_object();
             $_SESSION['logged_in'] = true;
             $_SESSION['login'] = $login;
             $_SESSION['cd_login'] = $row->cd_login;

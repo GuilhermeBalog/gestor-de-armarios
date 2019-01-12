@@ -44,6 +44,7 @@ create table tb_aluguel(
     id_armario int not null,
     dt_aluguel date not null,
     vl_aluguel varchar(6) not null,
+    st_aluguel boolean not null default 1,
     primary key(cd_aluguel),
     constraint aluguel_fk_id_aluno foreign key(id_aluno) references tb_aluno(cd_aluno),
     constraint aluguel_fk_id_armario foreign key(id_armario) references tb_armario(cd_armario)
@@ -57,3 +58,5 @@ create table tb_login(
     primary key(cd_login),
     constraint login_tx_login_unico unique(tx_login)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+insert into tb_login values (null,'Administrador','admin','d449f4ca7de9105e207f5acae9daf73d34d9a56d12908d66a6279b5bcbce0090');

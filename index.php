@@ -25,19 +25,19 @@
                         <i class="material-icons large  orange-text">lock</i>
                         <h3 class="h3-logo">Gestor de Armários</h3>
                     </div>
-                    <h1>Login</h1>
+                    <h1 class="hide-on-small-only">Login</h1>
                     <form action="actions/login.php" method="post">
-                        <div class="input-field">
+                        <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
                             <label for="tx_login">Usuário:</label>
                             <input type="text" id="tx_login" name="tx_login" required>
                         </div>
-                        <div class="input-field">
+                        <div class="input-field col s12">
                             <i class="material-icons prefix">lock</i>
                             <label for="tx_pass">Senha:</label>
                             <input type="password" id="tx_pass" name="tx_pass" required>
                         </div>
-                        <div class="input-field">
+                        <div class="input-field col s12">
                             <input type="submit" class="btn btn-large orange" value="Entrar">
                         </div>
                     </form>
