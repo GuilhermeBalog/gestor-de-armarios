@@ -128,4 +128,67 @@ class Administrador extends Utilitarios
             return false;
         }
     }
+
+    //Cadastrar novos locais
+    public function cadastrar_local($nome){
+        $sql = "INSERT into tb_local values(null, $nome)";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Alterar os dados de um um local
+    public function alterar_local($cd, $nome, $status){
+        $sql = "UPDATE tb_local set nm_local = $nome, st_local = $status";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Consultar os dados de um local
+    public function consultar_local($cd = ""){
+        $sql = "SELECT * from tb_local";
+        if($cd != ""){
+            $sql .= " where cd_local = $cd";
+        }
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return false;
+        }
+    }
+
+    //Inativar ou Ativar um local
+    public function toggle_local($cd){
+        $select = "SELECT st_local as status from tb_local where cd_local = $cd";
+        $query = $this->mysqli->query($select);
+
+        if($query->num_rows > 0){
+            $dados = $query->fetch_object();
+
+            if($dados->status == 1){
+                $novo = 0;
+            }else if($dados == 0){
+                $novo = 1;
+            }else{
+                return false;
+            }
+
+            $update = "UPDATE tb_local set st_local = $novo";
+            if($this->mysqli->query($update)){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+    }
 }
