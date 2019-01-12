@@ -75,9 +75,9 @@ class Administrador extends Utilitarios
     }
 
 
-    //Alterar os dados de um aluno
-    public function alterar_aluno($cd, $nome, $ano, $curso, $status){
-        $sql = "UPDATE tb_aluno set nm_aluno = $nome, nr_ano = $ano, $id_curso = $curso, $st_aluno = status";
+    //Atualizar os dados de um aluno
+    public function atualizar_aluno($cd, $nome, $ano, $curso, $status){
+        $sql = "UPDATE tb_aluno set nm_aluno = '$nome', nr_ano = '$ano', id_curso = '$curso', st_aluno = '$status'";
 
         if($this->mysqli->query($sql)){
             return true;
@@ -117,7 +117,7 @@ class Administrador extends Utilitarios
                 return false;
             }
 
-            $update = "UPDATE tb_aluno set st_aluno = $novo";
+            $update = "UPDATE tb_aluno set st_aluno = '$novo'";
             if($this->mysqli->query($update)){
                 return true;
             }else{
@@ -131,7 +131,7 @@ class Administrador extends Utilitarios
 
     //Cadastrar novos locais
     public function cadastrar_local($nome){
-        $sql = "INSERT into tb_local values(null, $nome)";
+        $sql = "INSERT into tb_local values(null, '$nome')";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -139,9 +139,9 @@ class Administrador extends Utilitarios
         }
     }
 
-    //Alterar os dados de um um local
-    public function alterar_local($cd, $nome, $status){
-        $sql = "UPDATE tb_local set nm_local = $nome, st_local = $status";
+    //Atualizar os dados de um um local
+    public function atualizar_local($cd, $nome, $status){
+        $sql = "UPDATE tb_local set nm_local = '$nome', st_local = '$status'";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -180,13 +180,76 @@ class Administrador extends Utilitarios
                 return false;
             }
 
-            $update = "UPDATE tb_local set st_local = $novo";
+            $update = "UPDATE tb_local set st_local = '$novo'";
             if($this->mysqli->query($update)){
                 return true;
             }else{
                 return false;
             }
 
+        }else{
+            return false;
+        }
+    }
+
+    //Cadastrar novos cursos
+    public function cadastrar_curso($sigla, $nome){
+        $sql = "INSERT into tb_curso values(null, '$sigla', '$nome')";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Atualizar os dados de um curso
+    public function atualizar_curso($cd, $sigla, $nome){
+        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = $nome";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Consultar os dados de um curso
+    public function consultar_curso($cd = ""){
+        $sql = "SELECT * from tb_curso";
+        if($cd != ""){
+            $sql .= " where cd_curso = $cd";
+        }
+
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return false;
+        }
+    }
+
+    //Inativar ou ativar um curso
+    public function toggle_curso($cd){
+        $select = "SELECT st_curso from tb_curso where cd_curso = $cd";
+        $query = $this->mysqli->query($select);
+
+        if($query->num_rows > 0){
+            $dados = $query->fetch_object();
+
+            if($dados->st_curso = 1){
+                $novo = 0;
+            }else if($dados->st_curso == 0){
+                $novo = 1
+            }else{
+                return false;
+            }
+
+            $update = "UPDATE tb_curso set st_curso = $novo";
+            if($this->mysqli->query($update)){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
