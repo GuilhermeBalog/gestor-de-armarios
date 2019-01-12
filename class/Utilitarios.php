@@ -3,11 +3,11 @@
 abstract class Utilitarios
 {
     /* Atributos */
-    private $host  = "localhost";
-    private $port  = 3307;
-    private $db    = "db_gestor_de_armarios";
-    private $user  = "root";
-    private $pass  = "";
+    private $host     = "localhost";
+    private $port     = 3307;
+    private $db       = "db_gestor_de_armarios";
+    private $user     = "root";
+    private $pass     = "usbw";
     protected $mysqli = null;
 
     public function db_connect()
