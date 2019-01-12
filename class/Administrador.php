@@ -117,7 +117,7 @@ class Administrador extends Utilitarios
                 return false;
             }
 
-            $update = "UPDATE tb_aluno set st_aluno = '$novo'";
+            $update = "UPDATE tb_aluno set st_aluno = '$novo' where cd_aluno = $cd";
             if($this->mysqli->query($update)){
                 return true;
             }else{
@@ -141,7 +141,7 @@ class Administrador extends Utilitarios
 
     //Atualizar os dados de um um local
     public function atualizar_local($cd, $nome, $status){
-        $sql = "UPDATE tb_local set nm_local = '$nome', st_local = '$status'";
+        $sql = "UPDATE tb_local set nm_local = '$nome', st_local = '$status' where cd_local = $cd";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -180,7 +180,7 @@ class Administrador extends Utilitarios
                 return false;
             }
 
-            $update = "UPDATE tb_local set st_local = '$novo'";
+            $update = "UPDATE tb_local set st_local = '$novo' where cd_local = $cd";
             if($this->mysqli->query($update)){
                 return true;
             }else{
@@ -239,7 +239,7 @@ class Administrador extends Utilitarios
             if($dados->st_curso = 1){
                 $novo = 0;
             }else if($dados->st_curso == 0){
-                $novo = 1
+                $novo = 1;
             }else{
                 return false;
             }
