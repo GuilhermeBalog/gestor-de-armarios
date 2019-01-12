@@ -57,3 +57,5 @@ create table tb_login(
     primary key(cd_login),
     constraint login_tx_login_unico unique(tx_login)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+insert into tb_login values (null,'Administrador','admin','d449f4ca7de9105e207f5acae9daf73d34d9a56d12908d66a6279b5bcbce0090');
