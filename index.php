@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="row s12" style="margin-bottom: 0;">
-            <div class="col l6 orange hide-on-med-and-down blue total-height valign-wrapper">
+            <div class="col l6 orange hide-on-med-and-down total-height valign-wrapper">
                 <div class="col s12 center">
                     <i class="material-icons large white-text">lock</i>
                     <h1>Gestor de Armários</h1>
