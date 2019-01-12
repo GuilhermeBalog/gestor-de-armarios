@@ -236,4 +236,42 @@ class Administrador extends Utilitarios
             return null;
         }
     }
+
+    //Cadastrar novos armarios
+    public function cadastrar_armario($cd = null, $local){
+        $sql = "INSERT into tb_armario values($cd, '$local', 1)";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Atualizar os dados de um armário
+    public function atualizar_armario($cd, $local, $status){    
+        $sql = "UPDATE tb_armario set id_local = '$local', st_armario = '$status' where cd_armario = $cd";
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Consultar os dados de um armário
+    public function consultar_armario($cd = "", $local = ""){
+        $sql = "SELECT * from tb_armario";
+        if($cd != ""){
+            $sql .= " where cd_armario = $cd";
+        }
+        if($local != ""){
+            $sql .= " where id_local = $local";
+        }
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return false;
+        }
+    }
 }
