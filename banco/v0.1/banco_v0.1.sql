@@ -63,8 +63,8 @@ insert into tb_login values (null,'Administrador','admin','d449f4ca7de9105e207f5
 insert into tb_curso values
     (null, 'MIN', 'Ensino Médio Integrado a Informática para Internet', 1),
     (null, 'MAD', 'Ensino Médio Integrado a Administração', 1),
-    (null, 'MAM', 'Ensino Médio Integrado a Meio Ambiente', 1)
+    (null, 'MAM', 'Ensino Médio Integrado a Meio Ambiente', 1);
 insert into tb_local values
     (null, 'Corredor de Armários', 1),
-    (null, 'Corredor do Bebedouro', 1)
+    (null, 'Corredor do Bebedouro', 1);
 s
