@@ -32,6 +32,7 @@ create table tb_local(
 
 create table tb_armario(
 	cd_armario int not null auto_increment,
+    st_armario boolean not null default 1,
     id_local int not null,
     primary key(cd_armario),
     constraint armario_fk_id_local foreign key(id_local) references tb_local(cd_local)
