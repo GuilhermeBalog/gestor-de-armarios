@@ -104,7 +104,7 @@ class Administrador extends Utilitarios
 
     //Atualizar os dados de um aluno
     public function atualizar_aluno($cd, $nome, $ano, $curso, $status){
-        $sql = "UPDATE tb_aluno set nm_aluno = '$nome', nr_ano = '$ano', id_curso = '$curso', st_aluno = '$status'";
+        $sql = "UPDATE tb_aluno set nm_aluno = '$nome', nr_ano = '$ano', id_curso = '$curso', st_aluno = '$status' where cd_aluno = $cd";
 
         if($this->mysqli->query($sql)){
             return true;
@@ -166,7 +166,7 @@ class Administrador extends Utilitarios
 
     //Cadastrar novos cursos
     public function cadastrar_curso($sigla, $nome){
-        $sql = "INSERT into tb_curso values(null, '$sigla', '$nome')";
+        $sql = "INSERT into tb_curso values(null, '$sigla', '$nome', 1)";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -175,8 +175,8 @@ class Administrador extends Utilitarios
     }
 
     //Atualizar os dados de um curso
-    public function atualizar_curso($cd, $sigla, $nome){
-        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = $nome";
+    public function atualizar_curso($cd, $sigla, $nome, $status){
+        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = '$nome', st_curso = '$status' where cd_curso = $cd";
         if($this->mysqli->query($sql)){
             return true;
         }else{
