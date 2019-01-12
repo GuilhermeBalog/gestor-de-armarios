@@ -1,3 +1,4 @@
+<?php include_once "init/init.php"; ?>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -17,7 +18,7 @@
         ?>
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
-
+                <h4>Seja Bem-Vindo(a) <?php echo explode(" ", $_SESSION["nm_user"])[0]; ?></h4>
             </main>
         </div>
         <script type="application/javascript" src="/js/jquery-3.3.1.min.js"></script>
