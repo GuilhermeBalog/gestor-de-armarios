@@ -160,7 +160,7 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
 
@@ -196,7 +196,7 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
 
@@ -271,7 +271,7 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
 }
