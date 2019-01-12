@@ -62,4 +62,70 @@ class Administrador extends Utilitarios
             return false;
         }
     }
+
+    // Cadastrar novos alunos
+    public function cadastrar_aluno($nome, $ano, $curso){
+        $sql = "INSERT into tb_aluno values(null, '$nome', '$ano', '$curso', 1)";
+
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Alterar os dados de um aluno
+    public function alterar_aluno($cd, $nome, $ano, $curso, $status){
+        $sql = "UPDATE tb_aluno set nm_aluno = $nome, nr_ano = $ano, $id_curso = $curso, $st_aluno = status";
+
+        if($this->mysqli->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Consultar dados de um aluno
+    public function consultar_aluno($cd = ""){
+        $sql = "SELECT * from tb_aluno";
+        if($cd != ""){
+            $sql .= " where cd_aluno = $cd ";
+        }
+
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return null;
+        }
+    }
+
+    //Inativar ou Ativar um aluno
+    public function toggle_aluno($cd){
+        $select = "SELECT st_aluno as status from tb_aluno where cd_aluno = $cd";
+        $query = $this->mysqli->query($select);
+
+        if($query->num_rows > 0){
+            $dados = $query->fetch_object();
+            if($dados->status == 1){
+                $novo = 0;
+            }else if($dados->status == 0){
+                $novo = 1;
+            }else{
+                return false;
+            }
+
+            $update = "UPDATE tb_aluno set st_aluno = $novo";
+            if($this->mysqli->query($update)){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+    }
 }
