@@ -104,7 +104,7 @@ class Administrador extends Utilitarios
 
     //Atualizar os dados de um aluno
     public function atualizar_aluno($cd, $nome, $ano, $curso, $status){
-        $sql = "UPDATE tb_aluno set nm_aluno = '$nome', nr_ano = '$ano', id_curso = '$curso', st_aluno = '$status'";
+        $sql = "UPDATE tb_aluno set nm_aluno = '$nome', nr_ano = '$ano', id_curso = '$curso', st_aluno = '$status' where cd_aluno = $cd";
 
         if($this->mysqli->query($sql)){
             return true;
@@ -160,13 +160,13 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
 
     //Cadastrar novos cursos
     public function cadastrar_curso($sigla, $nome){
-        $sql = "INSERT into tb_curso values(null, '$sigla', '$nome',1)";
+        $sql = "INSERT into tb_curso values(null, '$sigla', '$nome', 1)";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -175,8 +175,8 @@ class Administrador extends Utilitarios
     }
 
     //Atualizar os dados de um curso
-    public function atualizar_curso($cd, $sigla, $nome){
-        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = '$nome' where cd_curso = $cd";
+    public function atualizar_curso($cd, $sigla, $nome, $status){
+        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = '$nome', st_curso = '$status' where cd_curso = $cd";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -196,7 +196,7 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
 
@@ -223,10 +223,13 @@ class Administrador extends Utilitarios
     }
 
     //Consultar aluguel
-    public function consultar_aluguel($cd = ""){
+    public function consultar_aluguel($cd = "", $armario = ""){
         $sql = "SELECT * from tb_aluguel";
         if($cd != "") {
             $sql .= " where cd_aluguel = $cd";
+        }
+        if($armario != ""){
+            $sql .= " where id_armario = $armario and st_aluguel = 1";
         }
         $query = $this->mysqli->query($sql);
 
@@ -271,7 +274,23 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             return $query;
         }else{
-            return false;
+            return null;
         }
     }
+
+    public function contar_ocupacao(){
+        $sql_total = "SELECT count(cd_armario) as qt_armarios from tb_armario where st_armario = 1";
+        $query_total = $this->mysqli->query($sql_total);
+        $dados_total = $query_total->fetch_object();
+        $total = $dados_total->qt_armarios;
+
+        $sql_ocupados = "SELECT id_armario from tb_aluguel where st_aluguel = 1 group by id_armario";
+        $query_ocupados = $this->mysqli->query($sql_ocupados);
+        $ocupados = $query_ocupados->num_rows;
+
+        $ocupacao = ($ocupados / $total) * 100;
+        return $ocupacao;
+    }
+
+
 }

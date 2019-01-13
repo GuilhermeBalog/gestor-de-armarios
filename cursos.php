@@ -22,6 +22,7 @@
                 <h4>Edição de Curso</h4>
                 <form action="/actions/editar_curso.php" method="post">
                     <input type="hidden" id="editar_cd_curso" name="cd_curso">
+                    <input type="hidden" id="editar_st_curso" name="st_curso">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">school</i>
                         <input type="text" name="nm_curso" id="editar_nm_curso">
@@ -104,13 +105,13 @@
                                     $icon = "check";
                                 }
                                 ?>
-                                <tr id="curso_<?php echo $curso->cd_curso; ?>" data-sg-curso="<?php echo $curso->sg_curso; ?>"  data-nm-curso="<?php echo $curso->nm_curso; ?>">
+                                <tr id="curso_<?php echo $curso->cd_curso; ?>" data-sg-curso="<?php echo $curso->sg_curso; ?>"  data-nm-curso="<?php echo $curso->nm_curso; ?>" data-st-curso="<?php echo $curso->st_curso; ?>">
                                     <td><?php echo $curso->cd_curso; ?></td>
                                     <td><?php echo $curso->sg_curso; ?></td>
                                     <td><?php echo $curso->nm_curso; ?></td>
                                     <td><?php echo $curso->st_curso; ?></td>
                                     <td><a href="/actions/toggle_curso.php?cd=<?php echo $curso->cd_curso; ?>" class="btn-floating"><i class="material-icons"><?php echo $icon; ?></i></a></td>
-                                    <td><a data-target="editar_curso" href="#!" onclick="editar_dados('curso',<?php echo $curso->cd_curso; ?>,['sg_curso','nm_curso'])" class="btn-floating modal-trigger"><i class="material-icons">edit</i></a></td>
+                                    <td><a data-target="editar_curso" href="#!" onclick="editar_dados('curso',<?php echo $curso->cd_curso; ?>,['st_curso','sg_curso','nm_curso'])" class="btn-floating modal-trigger"><i class="material-icons">edit</i></a></td>
                                 </tr>
                                 <?php
                             }

@@ -81,3 +81,15 @@ body{
 ::-webkit-scrollbar-thumb:hover {
 	background: #e28d00;
 }
+
+.armario:before{
+	content: '#';
+}
+.armario{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	margin: 2px;
+}

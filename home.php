@@ -1,4 +1,4 @@
-<?php include_once "init/init.php"; ?>
+<?php include_once 'init/init.php'; ?>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -18,12 +18,15 @@
         ?>
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
-                <h4>Seja Bem-Vindo(a) <?php echo explode(" ", $_SESSION["nm_user"])[0]; ?></h4>
+                <div class="col s12"> 
+                    <h4><span id="saudacao">Olá</span>, <?php explode(" ", $_SESSION["nm_user"])[0]; ?>! </h4> 
+                </div>
             </main>
         </div>
         <script type="application/javascript" src="/js/jquery-3.3.1.min.js"></script>
         <script type="application/javascript" src="/js/materialize.js"></script>
         <script type="application/javascript" src="/js/menu_li_active.js"></script>
+        <script type="application/javascript" src="/js/saudacao.js"></script>
         <script type="application/javascript">
             $(document).ready(function(){
                 $('.sidenav').sidenav();
