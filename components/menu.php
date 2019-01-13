@@ -1,6 +1,6 @@
 <nav style="user-select: none;">
     <div class="nav-wrapper orange z-depth-1">
-        <a href="#!" class="brand-logo"><i class="material-icons" style="font-size: 3.5rem">lock</i><span class="hide-on-med-and-down">Gestão de Armários</span></a>
+        <a href="/home.php" class="brand-logo"><i class="material-icons" style="font-size: 3.5rem">lock</i><span class="hide-on-med-and-down">Gestão de Armários</span></a>
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/actions/logout.php">Logout</a></li>

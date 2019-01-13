@@ -176,7 +176,7 @@ class Administrador extends Utilitarios
 
     //Atualizar os dados de um curso
     public function atualizar_curso($cd, $sigla, $nome){
-        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = $nome";
+        $sql = "UPDATE tb_curso set sg_curso = '$sigla', nm_curso = '$nome' where cd_curso = $cd";
         if($this->mysqli->query($sql)){
             return true;
         }else{
