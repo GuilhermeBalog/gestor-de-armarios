@@ -21,15 +21,15 @@ class Administrador extends Utilitarios
         if($query->num_rows > 0){
             $dados = $query->fetch_object();
 
-            if($dados->status = 1){
-                $novo = 0;
-            }else if($dados->status == 0){
-                $novo = 1;
+            if($dados->status == '1'){
+                $novo = '0';
+            }else if($dados->status == '0'){
+                $novo = '1';
             }else{
                 return false;
             }
 
-            $update = "UPDATE tb_$tabela set st_$tabela = $novo";
+            $update = "UPDATE tb_$tabela set st_$tabela = $novo where cd_$tabela = $cd";
             if($this->mysqli->query($update)){
                 return true;
             }else{

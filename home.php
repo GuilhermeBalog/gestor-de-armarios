@@ -1,4 +1,4 @@
-<?php require_once 'init/init.php'; ?>
+<?php include_once 'init/init.php'; ?>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -19,7 +19,7 @@
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
                 <div class="col s12"> 
-                    <h3><span id="saudacao">Olá</span>, <?php echo $_SESSION['nm_user'] ?>! </h3> 
+                    <h4><span id="saudacao">Olá</span>, <?php explode(" ", $_SESSION["nm_user"])[0]; ?>! </h4> 
                 </div>
             </main>
         </div>

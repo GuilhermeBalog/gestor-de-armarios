@@ -40,6 +40,7 @@ body{
 	height: calc(100vh - 56px);
 	overflow-y: auto;
 	background-color: white !important;
+	padding:10px;
 }
 @media only screen and (min-width: 601px){
 	#pag-content{

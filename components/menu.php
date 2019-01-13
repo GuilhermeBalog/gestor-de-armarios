@@ -13,7 +13,7 @@
     <li id="li_fazer_aluguel"><a href="#!"><i class="material-icons">attach_money</i>Fazer Aluguel</a></li>
     <li id="li_armarios"><a href="armarios.php"><i class="material-icons">view_comfy</i>Armários</a></li>
     <li id="li_alunos"><a href="#!"><i class="material-icons">face</i>Alunos</a></li>
-    <li id="li_cursos"><a href="#!"><i class="material-icons">school</i>Cursos</a></li>
+    <li id="li_cursos"><a href="cursos.php"><i class="material-icons">school</i>Cursos</a></li>
     <li id="li_locais"><a href="#!"><i class="material-icons">room</i>Locais</a></li>
     <li id="li_administradores"><a href="#!"><i class="material-icons">account_circle</i>Administradores</a></li>
     <li id="li_logout"><a href="/actions/logout.php"><i class="material-icons">meeting_room</i>Logout</a></li>
