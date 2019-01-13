@@ -19,7 +19,7 @@
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
                 <div class="col s12"> 
-                    <h4><span id="saudacao">Olá</span>, <?php explode(" ", $_SESSION["nm_user"])[0]; ?>! </h4> 
+                    <h4><span id="saudacao">Olá</span>, <?php echo explode(" ", $_SESSION["nm_user"])[0]; ?>! </h4>
                 </div>
             </main>
         </div>

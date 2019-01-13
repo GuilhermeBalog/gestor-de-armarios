@@ -283,6 +283,9 @@ class Administrador extends Utilitarios
         $query_total = $this->mysqli->query($sql_total);
         $dados_total = $query_total->fetch_object();
         $total = $dados_total->qt_armarios;
+        if($total == 0){
+            $total = 1;
+        }
 
         $sql_ocupados = "SELECT id_armario from tb_aluguel where st_aluguel = 1 group by id_armario";
         $query_ocupados = $this->mysqli->query($sql_ocupados);
