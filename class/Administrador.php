@@ -223,10 +223,13 @@ class Administrador extends Utilitarios
     }
 
     //Consultar aluguel
-    public function consultar_aluguel($cd = ""){
+    public function consultar_aluguel($cd = "", $armario = ""){
         $sql = "SELECT * from tb_aluguel";
         if($cd != "") {
             $sql .= " where cd_aluguel = $cd";
+        }
+        if($armario != ""){
+            $sql .= " where id_armario = $armario and st_aluguel = 1";
         }
         $query = $this->mysqli->query($sql);
 
@@ -274,4 +277,20 @@ class Administrador extends Utilitarios
             return null;
         }
     }
+
+    public function contar_ocupacao(){
+        $sql_total = "SELECT count(cd_armario) as qt_armarios from tb_armario where st_armario = 1";
+        $query_total = $this->mysqli->query($sql_total);
+        $dados_total = $query_total->fetch_object();
+        $total = $dados_total->qt_armarios;
+
+        $sql_ocupados = "SELECT id_armario from tb_aluguel where st_aluguel = 1 group by id_armario";
+        $query_ocupados = $this->mysqli->query($sql_ocupados);
+        $ocupados = $query_ocupados->num_rows;
+
+        $ocupacao = ($ocupados / $total) * 100;
+        return $ocupacao;
+    }
+
+
 }

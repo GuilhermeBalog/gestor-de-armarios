@@ -3,7 +3,7 @@ var date = new Date();
 var hora = date.getHours();
 var mensagem;
 if(hora >= 0 && hora < 5){
-	mensagem = 'Boa madruga';
+	mensagem = 'Boa madrugada';
 }else if(hora >= 5 && hora < 12){
 	mensagem = 'Bom dia';
 }else if(hora >= 12 && hora < 19){

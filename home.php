@@ -19,7 +19,7 @@
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
                 <div class="col s12"> 
-                    <h1><span id="saudacao">Olá</span>, <?php echo $_SESSION['nm_user'] ?>! </h1> 
+                    <h3><span id="saudacao">Olá</span>, <?php echo $_SESSION['nm_user'] ?>! </h3> 
                 </div>
             </main>
         </div>
