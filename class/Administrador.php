@@ -135,7 +135,7 @@ class Administrador extends Utilitarios
 
     //Cadastrar novos locais
     public function cadastrar_local($nome){
-        $sql = "INSERT into tb_local values(null, '$nome')";
+        $sql = "INSERT into tb_local values(null, '$nome', 1)";
         if($this->mysqli->query($sql)){
             return true;
         }else{
