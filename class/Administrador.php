@@ -242,7 +242,7 @@ class Administrador extends Utilitarios
 
     //Cadastrar novos armarios
     public function cadastrar_armario($cd = null, $local){
-        $sql = "INSERT into tb_armario values($cd, '$local', 1)";
+        $sql = "INSERT into tb_armario values($cd, 1, '$local')";
         if($this->mysqli->query($sql)){
             return true;
         }else{
@@ -292,7 +292,7 @@ class Administrador extends Utilitarios
         $ocupados = $query_ocupados->num_rows;
 
         $ocupacao = ($ocupados / $total) * 100;
-        return $ocupacao;
+        return round($ocupacao, 2);
     }
 
 
