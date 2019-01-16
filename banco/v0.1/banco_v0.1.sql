@@ -67,4 +67,3 @@ insert into tb_curso values
 insert into tb_local values
     (null, 'Corredor de Armários', 1),
     (null, 'Corredor do Bebedouro', 1);
-s

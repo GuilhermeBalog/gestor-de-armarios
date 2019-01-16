@@ -53,11 +53,15 @@ class Administrador extends Utilitarios
     }
 
     //Atualizar os dados de um usuário
-    public function atualizar_usuario($cd, $nome, $senha){
-        $senha = $this->encriptar_senha($senha);
-        $ins = "UPDATE tb_login set nm_user = '$nome', tx_pass = '$senha' where cd_login = '$cd'";
+    public function atualizar_usuario($cd, $nome, $tx_login, $senha = ""){
+        $sql = "UPDATE tb_login set nm_user = '$nome', tx_login = '$tx_login'";
+        if($senha != ""){
+            $senha = $this->encriptar_senha($senha);
+            $sql .= ", tx_pass = '$senha'";
+        }
+        $sql .= " where cd_login = '$cd'";
 
-        if($this->mysqli->query($ins)){
+        if($this->mysqli->query($sql)){
             return true;
         }else{
             return false;
@@ -66,7 +70,7 @@ class Administrador extends Utilitarios
 
     //Consulta os dados dos usuários
     public function consultar_usuario($cd = ""){
-        $sql = "SELECT * from tb_usuario";
+        $sql = "SELECT * from tb_login";
         if($cd != ""){
             $sql .= " where cd_login = $cd";
         }
@@ -131,7 +135,7 @@ class Administrador extends Utilitarios
 
     //Cadastrar novos locais
     public function cadastrar_local($nome){
-        $sql = "INSERT into tb_local values(null, '$nome')";
+        $sql = "INSERT into tb_local values(null, '$nome', 1)";
         if($this->mysqli->query($sql)){
             return true;
         }else{
