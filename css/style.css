@@ -93,3 +93,6 @@ body{
 	text-align: center;
 	margin: 2px;
 }
+.modal .row{
+	margin-bottom: 0;
+}
