@@ -56,16 +56,18 @@
                                     $query = $admin->consultar_local();
                                     if(!empty($query)){
                                         while($local = $query->fetch_object()){
-                                            $selected = '';
-                                            if(isset($_GET['local'])){
-                                                if($local->cd_local == $_GET['local']){
-                                                    $selected = 'selected';
+                                            if($local->st_local == 1){
+                                                $selected = '';
+                                                if(isset($_GET['local'])){
+                                                    if($local->cd_local == $_GET['local']){
+                                                        $selected = 'selected';
+                                                    }
                                                 }
-                                            }
-                                            echo "<option value='$local->cd_local' $selected>$local->nm_local</option>";    
+                                                echo "<option value='$local->cd_local' $selected>$local->nm_local</option>";
+                                            } 
                                         }
                                     }else{
-                                        echo "<option value='' disabled selected>";
+                                        echo "<option value='' disabled selected>Sem Locais</option>";
                                     }
                                 ?>
                             </select>
@@ -157,53 +159,57 @@
 								$query_local = $admin->consultar_local();
 								if(!empty($query_local)){
 									while($local = $query_local->fetch_object()){
-										if(isset($_GET['local'])){
-											if($local->cd_local == $_GET['local']){
-												echo "<li class='active'>";
-											}else{
-												echo "<li>";
-											}
-										}else{
-											echo "<li>";
-										}
-										echo "<div class='collapsible-header'>";
-										echo "<i class='material-icons'>place</i>";
-										echo $local->nm_local;
-										echo "</div>";
-										echo "<div class='collapsible-body'>";
-										$query_armario = $admin->consultar_armario("", $local->cd_local);
-										if(!empty($query_armario)){
-											while($armario = $query_armario->fetch_object()){
-												if($armario->st_armario == 1){
-													$query_ocupacao = $admin->consultar_aluguel("", $armario->cd_armario);
-													if(!empty($query_ocupacao)){
-														$cor = "red";
-													}else{
-														$cor = "green";
-													}
-												}else{
-													$cor = "grey";
-												}
-												echo "<a href='#ver_armario' class='modal-trigger' onclick='aluno_armario($armario->cd_armario)'>";
-												echo "<div class='armario $cor valign-wrapper white-text'>";
-												echo $armario->cd_armario;
-												echo "</div>";
-												echo "</a>";
-											}
-											?>
-											<a href='#cadastrar_com_local' class='modal-trigger btn btn-floating green' style='margin:4px' onclick="select_local(<?php echo $local->cd_local;?>, '<?php echo $local->nm_local;?>')">
-											<i class='material-icons'>add</i>
-											</a>
-											<?php
-										}else{
-											?>
-											<div class='grey-text'>
-											<h4>Sem armários aqui!</h4>
-											<a href='#cadastrar_com_local' class='modal-trigger' onclick="select_local(<?php echo $local->cd_local?>, '<?php echo $local->nm_local; ?>')">Clique para cadastrar um armário em <?php echo $local->nm_local?></a>
-											</div>
-											<?php
-										}
-										echo "</div>";
+                                        if($local->st_local == 1){
+    										if(isset($_GET['local'])){
+    											if($local->cd_local == $_GET['local']){
+    												echo "<li class='active'>";
+    											}else{
+    												echo "<li>";
+    											}
+    										}else{
+    											echo "<li>";
+    										}
+    										echo "<div class='collapsible-header'>";
+    										echo "<i class='material-icons'>place</i>";
+    										echo $local->nm_local;
+    										echo "</div>";
+    										echo "<div class='collapsible-body'>";
+    										$query_armario = $admin->consultar_armario("", $local->cd_local);
+    										if(!empty($query_armario)){
+    											while($armario = $query_armario->fetch_object()){
+    												if($armario->st_armario == 1){
+    													$query_ocupacao = $admin->consultar_aluguel("", $armario->cd_armario);
+    													if(!empty($query_ocupacao)){
+    														$cor = "red";
+    													}else{
+    														$cor = "green";
+    													}
+    												}else{
+    													$cor = "grey";
+    												}
+                                                    ?>
+    												<a href="#ver_armario" class="modal-trigger" onclick="aluno_armario(<?php echo $armario->cd_armario; ?>, '<?php echo $cor; ?>')">
+        												<div class='armario <?php echo $cor; ?> valign-wrapper white-text'>
+        												    <?php echo $armario->cd_armario; ?>
+        												</div>
+    												</a>
+                                                    <?php
+    											}
+    											?>
+    											<a href='#cadastrar_com_local' class='modal-trigger btn btn-floating green' style='margin:4px' onclick="select_local(<?php echo $local->cd_local;?>, '<?php echo $local->nm_local;?>')">
+    											<i class='material-icons'>add</i>
+    											</a>
+    											<?php
+    										}else{
+    											?>
+    											<div class='grey-text'>
+    											<h4>Sem armários aqui!</h4>
+    											<a href='#cadastrar_com_local' class='modal-trigger' onclick="select_local(<?php echo $local->cd_local?>, '<?php echo $local->nm_local; ?>')">Clique para cadastrar um armário em <?php echo $local->nm_local?></a>
+    											</div>
+    											<?php
+    										}
+    										echo "</div>";
+                                        }
 									}
 								}else{
 									echo "<div class='center grey-text'>";
