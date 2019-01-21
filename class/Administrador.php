@@ -282,6 +282,31 @@ class Administrador extends Utilitarios
         }
     }
 
+    public function consultar_aluno_armario($armario, $status = 1){
+        $sql = "SELECT ";
+        $sql .= "cd_armario as Armario, ";
+        $sql .= "nm_local as Local, ";
+        $sql .= "id_aluno as RM,";
+        $sql .= "nm_aluno as Nome, ";
+        $sql .= "concat(nr_ano, sg_curso) as Sala, ";
+        $sql .= "date_format(dt_aluguel, '%d/%m/%Y') as 'Data', ";
+        $sql .= "concat('R$',vl_aluguel) as 'Valor' ";
+        $sql .= "from tb_local ";
+        $sql .= "join tb_armario on id_local = cd_local ";
+        $sql .= "join tb_aluguel on id_armario = cd_armario ";
+        $sql .= "join tb_aluno on id_aluno = cd_aluno ";
+        $sql .= "join tb_curso on id_curso = cd_curso ";
+        $sql .= "where st_aluguel = $status and id_armario = $armario";
+
+        $query = $this->mysqli->query($sql);
+
+        if($query->num_rows > 0){
+            return $query;
+        }else{
+            return null;
+        }
+    }
+
     public function contar_ocupacao(){
         $sql_total = "SELECT count(cd_armario) as qt_armarios from tb_armario where st_armario = 1";
         $query_total = $this->mysqli->query($sql_total);
@@ -298,6 +323,4 @@ class Administrador extends Utilitarios
         $ocupacao = ($ocupados / $total) * 100;
         return round($ocupacao, 2);
     }
-
-
 }

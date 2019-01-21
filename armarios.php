@@ -82,15 +82,15 @@
 
         <!-- Modal de cadastro com local específico -->
         <div id="cadastrar_com_local" class="modal">
-        	<div class="modal-content">
+        	<div class="row modal-content">
         		<h4>Cadastro de Armário</h4>
         		<p>
                     <label class="black-text">
-                        <input type="radio" checked class="with-gap" name="tp_cadastro" id="rd_varios_local">
+                        <input type="radio" checked class="with-gap" name="tp_cadastro_local" id="rd_varios_local">
                         <span>Vários Armários</span>
                     </label>
                     <label class="black-text">
-                        <input type="radio" class="with-gap" name="tp_cadastro" id="rd_um_local">
+                        <input type="radio" class="with-gap" name="tp_cadastro_local" id="rd_um_local">
                         <span>1 Armário</span>
                     </label>
                 </p>
@@ -127,6 +127,11 @@
         	</div>
         </div>
         <!-- Fim do modal específico -->
+
+        <!-- Modal de visualização -->
+        <div id="ver_armario" class="modal"></div>
+        <!-- Fim do modal de visualização -->
+
         <div class="row s12" style="margin-bottom: 0px;">
             <main id="pag-content">
                 <div class="col s12"> 
@@ -169,15 +174,21 @@
 										$query_armario = $admin->consultar_armario("", $local->cd_local);
 										if(!empty($query_armario)){
 											while($armario = $query_armario->fetch_object()){
-												$query_ocupacao = $admin->consultar_aluguel("", $armario->cd_armario);
-												if(!empty($query_ocupacao)){
-													$cor = "red";
+												if($armario->st_armario == 1){
+													$query_ocupacao = $admin->consultar_aluguel("", $armario->cd_armario);
+													if(!empty($query_ocupacao)){
+														$cor = "red";
+													}else{
+														$cor = "green";
+													}
 												}else{
-													$cor = "green";
+													$cor = "grey";
 												}
+												echo "<a href='#ver_armario' class='modal-trigger' onclick='aluno_armario($armario->cd_armario)'>";
 												echo "<div class='armario $cor valign-wrapper white-text'>";
 												echo $armario->cd_armario;
 												echo "</div>";
+												echo "</a>";
 											}
 											?>
 											<a href='#cadastrar_com_local' class='modal-trigger btn btn-floating green' style='margin:4px' onclick="select_local(<?php echo $local->cd_local;?>, '<?php echo $local->nm_local;?>')">
@@ -211,15 +222,13 @@
         <script type="application/javascript" src="/js/toggle_cadastro_armario.js"></script>
         <script type="application/javascript" src="/js/select_local.js"></script>
         <script type="application/javascript" src="/js/menu_li_active.js"></script>
+        <script type="application/javascript" src="/js/aluno_armario.js"></script>
         <script type="application/javascript">
             $(document).ready(function(){
                 $('.sidenav').sidenav();
                 $('.collapsible').collapsible();
                 $('.modal').modal();
                 $('select').formSelect();
-				elem = $("#id_local");
-				var instance = M.FormSelect.getInstance(elem);
-				console.log(instance.dropdown);
             });
         </script>
     </body>

@@ -2,11 +2,11 @@ var um = $('#um').detach();
 var varios;
 $('#rd_um').on('change', function(){
     varios = $('#varios').detach();
-    $('#form_padra').prepend(um);
+    $('#form_padrao').prepend(um);
 });
 $('#rd_varios').on('change', function(){
     um = $('#um').detach();
-    $('#form_padra').prepend(varios)
+    $('#form_padrao').prepend(varios)
 });
 $("#nr_inicio").on('change', function(){
     var min = parseInt($(this).val()) + 1;
