@@ -209,6 +209,7 @@
     											<?php
     										}
     										echo "</div>";
+                                            echo "</li>";
                                         }
 									}
 								}else{

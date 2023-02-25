@@ -119,7 +119,7 @@ class Administrador extends Utilitarios
 
     //Consultar dados de um aluno
     public function consultar_aluno($cd = ""){
-        $sql = "SELECT * from tb_aluno";
+        $sql = "SELECT cd_aluno, nm_aluno, nr_ano, st_aluno, id_curso, sg_curso, nm_curso, concat(nr_ano, sg_curso) as nm_sala from tb_aluno join tb_curso on id_curso = cd_curso";
         if($cd != ""){
             $sql .= " where cd_aluno = $cd ";
         }
